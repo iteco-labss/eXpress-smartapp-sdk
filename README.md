@@ -325,66 +325,89 @@ __Запрос результатов поиска по корпоративно
 3. Запрос менее 3х символов, error_code = filter_too_short
 ```
 
-__Кеширование статики с помощью WorkboxWebpackPlugin__
+__Запрос результатов поиска по корпоративной phonebook и результат трастового поиска__
 
-Если приложение было создано с помощью `create-react-app`, добавляем строчку в `package.json`:
+`const response = yield searchCorporatePhonebook({ filter }: { filter: string | null })`
+
+Метод отправляет клиенту запрос типа:
 
 ```
-"scripts": {
-    "eject": "react-scripts eject",
+{
+    "ref": <string>,
+    "handler": "express",
+    "type": "search_corporate_phonebook",
+    "payload": {
+        "filter": <string|null>,
+    },
+    "files": []
 }
 ```
 
-В зависимости приложения добавляем `smartapp-sdk` версии `1.0.7` или выше:
+И получает ответ типа:
 
 ```
-"dependencies": {
-    "@expressms/smartapp-sdk": "^1.0.7",
+{
+    "ref": <string>,
+    "status": "success",
+    "data": {
+      "corp_phonebook_entries": [
+        {
+          "avatar": <string|null>,
+          "name": <string>,
+          "company": <string|null>,
+          "company_position": <string|null>,
+          "office": <string|null>,
+          "department": <string|null>,
+          "server_name": <string>,
+          "contacts": [
+            {
+              "active": <bool>,
+              "contact": <string>,
+              "contact_type": <string>,
+              "user_huid": <uuid>,
+              "user_kind": <string>,
+            }
+          ],
+        },
+      ],
+      "trust_search_entries": [
+        {
+          "avatar": <string|null>,
+          "name": <string>,
+          "company": <string|null>,
+          "company_position": <string|null>,
+          "office": <string|null>,
+          "department": <string|null>,
+          "server_name": <string>,
+          "contacts": [
+            {
+              "active": <bool>,
+              "contact": <string>,
+              "contact_type": <string>,
+              "user_huid": <uuid>,
+              "user_kind": <string>,
+            }
+          ],
+        },
+      ],
+    }
 }
 ```
 
-Устанавливаем пакет и выполняем команду `npm run eject`.
-
-Далее, делаем следующие изменения в файлах:
-
-Добавляем код в `index.tsx`:
+Ответ клиента в случае ошибки:
 
 ```
-if (module.hot) module.hot.accept()
-
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js")
-    })
-}
+  {
+    "ref": <string>,
+    "status": "error",
+    "error_code": <string>
+  }
 ```
 
-Добавляем код в файл `webpack.config.js`:
+Статус error и error_code отправляются в следующих случаях:
 
 ```
-plugins: [
-    new WorkboxWebpackPlugin.InjectManifest({
-    swSrc: "@expressms/smartapp-sdk/workers/workbox.js", // path to worker
-    swDest: "sw.js"
-}),
+1. Таймаут одного из REST API, error_code = timeout
+2. Ошибка сервера 4xx, error_code = <reason из ответа сервера>
+3. Запрос менее 3х символов, error_code = filter_too_short
 ```
-
-Удаляем в файле `webpack.config.js` следующий код:
-
-```
-// Generate a service worker script that will precache, and keep up to date,
-// the HTML & assets that are part of the webpack build.
-isEnvProduction &&
-fs.existsSync(swSrc) &&
-new WorkboxWebpackPlugin.InjectManifest({
-    swSrc,
-    dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
-    exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
-    // Bump up the default maximum size (2mb) that"s precached,
-    // to make lazy-loading failure scenarios less likely.
-    // See <https://github.com/cra-template/pwa/issues/13#issuecomment-722667270>
-    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-}),
-```
-
-Запускаем приложение, проверяем регистрацию сервис-воркера.
