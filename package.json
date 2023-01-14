@@ -39,7 +39,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@expressms/smartapp-bridge": "^1.1.5"
+    "@expressms/smartapp-bridge": "github:iteco-labss/eXpress-smartapp-bridge-next"
   },
   "files": [
     "build/main",

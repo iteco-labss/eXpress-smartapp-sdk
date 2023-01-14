@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@expressms/smartapp-bridge': ^1.1.5
+  '@expressms/smartapp-bridge': github:iteco-labss/eXpress-smartapp-bridge-next
   '@rollup/plugin-commonjs': ^17.1.0
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -18,7 +18,7 @@ specifiers:
   typescript: ^4.9.4
 
 dependencies:
-  '@expressms/smartapp-bridge': 1.1.5
+  '@expressms/smartapp-bridge': github.com/iteco-labss/eXpress-smartapp-bridge-next/eb92cc9afecffe25f34627bcfa0ff25cf526b534
 
 devDependencies:
   '@rollup/plugin-commonjs': 17.1.0_rollup@2.79.1
@@ -74,15 +74,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /@expressms/smartapp-bridge/1.1.5:
-    resolution: {integrity: sha512-50ijUv0HoTGcfZ5MAcDFDfZ0DzNYcBpOopoIttiKxkfWTDJsUWy6UW82dEd9Ch4cZRaTxDU9up9+9ZKktZt3Hw==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@types/lodash': 4.14.191
-      eventemitter3: 4.0.7
-      uuid: 8.3.2
-    dev: false
 
   /@humanwhocodes/config-array/0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}
@@ -187,10 +178,6 @@ packages:
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
-
-  /@types/lodash/4.14.191:
-    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
-    dev: false
 
   /@types/node/18.11.17:
     resolution: {integrity: sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==}
@@ -855,8 +842,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /eventemitter3/4.0.7:
-    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
+  /eventemitter3/5.0.0:
+    resolution: {integrity: sha512-riuVbElZZNXLeLEoprfNYoDSwTBRR44X3mnhdI1YcnENpWTCsTTVZ2zFuqQcpoyqPQIUXdiPEU0ECAq0KQRaHg==}
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -1248,6 +1235,10 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
@@ -1672,8 +1663,8 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /uuid/8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 
@@ -1711,3 +1702,14 @@ packages:
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
+
+  github.com/iteco-labss/eXpress-smartapp-bridge-next/eb92cc9afecffe25f34627bcfa0ff25cf526b534:
+    resolution: {tarball: https://codeload.github.com/iteco-labss/eXpress-smartapp-bridge-next/tar.gz/eb92cc9afecffe25f34627bcfa0ff25cf526b534}
+    name: '@expressms/smartapp-bridge'
+    version: 1.2.5
+    engines: {node: '>=14'}
+    dependencies:
+      eventemitter3: 5.0.0
+      lodash-es: 4.17.21
+      uuid: 9.0.0
+    dev: false
