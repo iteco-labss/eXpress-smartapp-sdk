@@ -5,6 +5,6 @@ src/**.js
 coverage
 *.log
 public
-build/*
+build/tsconfig.*
 .DS_Store
 src/.DS_Store
